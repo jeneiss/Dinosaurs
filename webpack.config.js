@@ -1,5 +1,6 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const { prependListener } = require('process');
 
 module.exports = {
   entry: './src/app.js',
@@ -14,6 +15,7 @@ module.exports = {
   module: {
     rules: [
       {test: /\.(js)$/, use: 'babel-loader'},
+      {test: /\.js$/, enforce: 'pre', use: ['source-map-loader']},
       {test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader']},
       {test: /\.css$/, use: ['style-loader', 'css-loader']}
     ]
