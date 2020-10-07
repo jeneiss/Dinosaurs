@@ -73,7 +73,7 @@
         {
             "species": "Pigeon",
             "weight": 0.5,
-            "height": 9,
+            "height": 0.833333,
             "diet": "herbivore",
             "where": "World Wide",
             "when": "Holocene",
