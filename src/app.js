@@ -11,12 +11,19 @@ const handleForm = (e) => {
   e.preventDefault();
   const form = e.target;
 
-  //remove form from html on submit
   //create human object
   const human = new Human(form);
 
   //create dino objects
   const dinoList = createDinoObjects(Dinos, human);
+
+  //remove form from html
+  form.classList.add('u-display-none');
+
+  //add dino tiles to DOM
+  addDinoTiles(dinoList);
+
+  //add human tile to DOM
 };
 
 document.addEventListener('submit', handleForm);
@@ -26,7 +33,6 @@ document.addEventListener('submit', handleForm);
  * @constructor
  * @param {element} form - Form as HTML element
  */
-
 function Human(form) {
   this.name = form.user_name.value;
   this.weight = form.user_weight.value;
@@ -36,16 +42,16 @@ function Human(form) {
     inches: parseInt(form.user_height_inches.value)
   }
 
-  this.heightInFeet = () => {
+  this.heightInFeet = function() {
     return this.height.inches/12 + this.height.feet;
   }
 }
 
 /**
  * @description Loops through dinos to create dinosaur objects with additional methods
- * @param {array} Dinos - Array of objects that describe dinosaurs
- * @param {object} human - Object that describes a human
- * @returns {array} - Array of objects that describe dinosaurs
+ * @param {array} Dinos - Array of objects describing dinosaurs
+ * @param {object} human - Object describing a human
+ * @returns {array} - Array of objects describing dinosaurs
  */
 const createDinoObjects = (Dinos, human) => {
   const dinosaursArr = Dinos.map((dino) => {
@@ -63,11 +69,42 @@ const createDinoObjects = (Dinos, human) => {
  */
 const Dinosaur = (dino, human) => {
   return Object.assign(dino, {
-    compareHeight: () => {
+    compareHeight: function() {
       const heightDiff = Math.round(dino.height/human.heightInFeet());
       return heightDiff;
     },
-    compareWeight: () => {},
-    compareDiet: () => {}
+    compareWeight: function() {},
+    compareDiet: function() {}
   })
+}
+
+/**
+ * @description Loops through object array to append info to DOM
+ * @param {array} dinoList - array of objects describing dinosaurs
+ */
+const addDinoTiles = (dinoList) => {
+  //create new div for tiles
+  const newDiv = document.createElement('div');
+  const mainTiles = document
+    .querySelector('.main__content-inner')
+    .appendChild(newDiv)
+    .classList.add('main__tiles');
+
+  //append tiles to .main__tiles
+  dinoList.forEach((dino, index) => {
+    document.querySelector('.main__tiles').insertAdjacentHTML('beforeend',
+        `
+        <div class='main__tiles-inner'>
+          <div class='main__tile' data='data-index-${index}'>
+            <div class='main__tile-inner'>
+              <img src='${dino.imageSrc}' />
+              <h4>${dino.species}</h4>
+              <p>${dino.where}</p>
+              <p>${dino.when}</p>
+            </div>
+          </div>
+        </div>
+        `
+    );
+  });
 }
