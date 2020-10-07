@@ -36,12 +36,14 @@ document.addEventListener('submit', handleForm);
  */
 function Human(form) {
   this.name = form.user_name.value;
+  this.location = form.user_location.value;
   this.weight = form.user_weight.value;
   this.diet = form.user_diet.value;
   this.height = {
     feet: parseInt(form.user_height_feet.value),
     inches: parseInt(form.user_height_inches.value)
   }
+  this.imageSrc = './images/human.png'
 
   this.heightInFeet = function() {
     return this.height.inches/12 + this.height.feet;
@@ -119,24 +121,42 @@ const addDinoTiles = (dinoList) => {
   //append tiles to .main__tiles
   dinoList.forEach((dino, index) => {
     document.querySelector('.main__tiles').insertAdjacentHTML('beforeend',
-        `
-          <div class='main__tile' data='data-index-${index}'>
-            <div class='main__tile-inner'>
-              <img src='${dino.imageSrc}' />
-              <h4>${dino.species}</h4>
-              <p>Location: ${dino.where}</p>
-              <p>Time period: ${dino.when}</p>
-              <p>${dino.fact}</p>
-              <p>${dino.compareHeight()}</p>
-              <p>${dino.compareWeight()}</p>
-              <p>${dino.compareDiet()}</p>
-            </div>
+      `
+        <div class='main__tile' data-id='index-${index}'>
+          <div class='main__tile-inner'>
+            <img src='${dino.imageSrc}' />
+            <h4>${dino.species}</h4>
+            <p>Location: ${dino.where}</p>
+            <p>Time period: ${dino.when}</p>
+            <p>${dino.fact}</p>
+            <p>${dino.compareHeight()}</p>
+            <p>${dino.compareWeight()}</p>
+            <p>${dino.compareDiet()}</p>
           </div>
-        `
+        </div>
+      `
     );
   });
 }
 
+/**
+ * @description Insert human info into DOM
+ * @param {object} human - object describing human
+ */
 const addHumanTile = (human) => {
-
+  document.querySelector('[data-id="index-3"]').insertAdjacentHTML('afterend',
+    `
+      <div class='main__tile' data-id='human'>
+        <div class='main__tile-inner'>
+          <img src='${human.imageSrc}' />
+          <h4>${human.name}</h4>
+          <p>Location: ${human.location}</p>
+          <p>Time period: Now</p>
+          <p>Height: ${human.height.feet}ft ${human.height.inches}in</p>
+          <p>Weight: ${human.weight}</p>
+          <p>Diet: ${human.diet}</p>
+        </div>
+      </div>
+    `
+  );
 }
