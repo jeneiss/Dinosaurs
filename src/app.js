@@ -24,6 +24,7 @@ const handleForm = (e) => {
   addDinoTiles(dinoList);
 
   //add human tile to DOM
+  addHumanTile(human);
 };
 
 document.addEventListener('submit', handleForm);
@@ -31,7 +32,7 @@ document.addEventListener('submit', handleForm);
 /**
  * @description Creates object that describes human based on form data
  * @constructor
- * @param {element} form - Form as HTML element
+ * @param {element} form - Form with user input as HTML element
  */
 function Human(form) {
   this.name = form.user_name.value;
@@ -70,11 +71,36 @@ const createDinoObjects = (Dinos, human) => {
 const Dinosaur = (dino, human) => {
   return Object.assign(dino, {
     compareHeight: function() {
-      const heightDiff = Math.round(dino.height/human.heightInFeet());
-      return heightDiff;
+      if (this.height > human.heightInFeet()) {
+        const heightDiff = Math.round(this.height/human.heightInFeet());
+        return `The ${this.species} is about ${heightDiff} times taller than you.`;
+      } else if (this.height === human.heightInFeet()) {
+        return `You are about the same height as the ${this.species}.`;
+      } else {
+        const heightDiff = Math.round(human.heightInFeet()/this.height);
+        return `You are about ${heightDiff} times taller than the ${this.species}.`;
+      }
     },
-    compareWeight: function() {},
-    compareDiet: function() {}
+    compareWeight: function() {
+      if (this.weight > human.weight) {
+        return `The ${this.species} weighs about ${this.weight-human.weight} pounds more than you.`;
+      } else if (this.weight === human.weight) {
+        return `You weight about the same as ${this.species}.`;
+      } else {
+        return `You weigh about ${human.weight-this.weight} pounds more than the  ${this.species}.`;
+      }
+    },
+    compareDiet: function() {
+      if (this.diet === human.diet) {
+        return `You are both ${this.diet}s!`
+      } else {
+        if (this.diet === 'omnivore') {
+          return `Unlike you, the ${this.species} is an ${this.diet}.`
+        } else {
+          return `Unlike you, the ${this.species} is a ${this.diet}.`
+        }
+      }
+    }
   })
 }
 
@@ -85,7 +111,7 @@ const Dinosaur = (dino, human) => {
 const addDinoTiles = (dinoList) => {
   //create new div for tiles
   const newDiv = document.createElement('div');
-  const mainTiles = document
+  document
     .querySelector('.main__content-inner')
     .appendChild(newDiv)
     .classList.add('main__tiles');
@@ -94,17 +120,23 @@ const addDinoTiles = (dinoList) => {
   dinoList.forEach((dino, index) => {
     document.querySelector('.main__tiles').insertAdjacentHTML('beforeend',
         `
-        <div class='main__tiles-inner'>
           <div class='main__tile' data='data-index-${index}'>
             <div class='main__tile-inner'>
               <img src='${dino.imageSrc}' />
               <h4>${dino.species}</h4>
-              <p>${dino.where}</p>
-              <p>${dino.when}</p>
+              <p>Location: ${dino.where}</p>
+              <p>Time period: ${dino.when}</p>
+              <p>${dino.fact}</p>
+              <p>${dino.compareHeight()}</p>
+              <p>${dino.compareWeight()}</p>
+              <p>${dino.compareDiet()}</p>
             </div>
           </div>
-        </div>
         `
     );
   });
+}
+
+const addHumanTile = (human) => {
+
 }
