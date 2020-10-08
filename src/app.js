@@ -18,6 +18,7 @@ const handleForm = (e) => {
   const dinoList = createDinoObjects(Dinos, human);
 
   //remove form from html
+  const content = document.querySelector(".main__content-inner");
   form.classList.add('u-display-none');
 
   //add dino tiles to DOM
@@ -25,6 +26,9 @@ const handleForm = (e) => {
 
   //add human tile to DOM
   addHumanTile(human);
+
+  //add reset button to DOM
+  addResetButton(form, content);
 };
 
 document.addEventListener('submit', handleForm);
@@ -159,4 +163,33 @@ const addHumanTile = (human) => {
       </div>
     `
   );
+}
+
+/**
+ * @description Adds reset button with click handler to DOM
+ * @param {element} form - Form with user input as HTML element
+ * @param {element} content - Div with 'main__content-inner' class
+ */
+const addResetButton = (form, content) => {
+  const newDiv = document.createElement("div");
+  content
+    .appendChild(newDiv)
+    .classList.add('main__reset');
+
+  const reset = document.querySelector('.main__reset');
+  reset.insertAdjacentHTML('beforeend',
+    `
+      <button class='main__reset-btn'>Reset</button>
+    `
+  );
+
+  const resetBtn = document.querySelector('.main__reset-btn');
+  resetBtn.addEventListener('click', () => {
+    const tiles = document.querySelector('.main__tiles');
+    content.removeChild(tiles);
+    content.removeChild(reset);
+
+    form.reset();
+    form.classList.remove('u-display-none');
+  });
 }
