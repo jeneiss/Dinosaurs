@@ -2,37 +2,6 @@ import './app.less';
 import 'normalize.css';
 import { Dinos } from './dino.json';
 
-
-/**
- * @description Capture data from submitted form
- * @param {object} e - The event object
- */
-const handleForm = (e) => {
-  e.preventDefault();
-  const form = e.target;
-
-  //create human object
-  const human = new Human(form);
-
-  //create dino objects
-  const dinoList = createDinoObjects(Dinos, human);
-
-  //remove form from html
-  const content = document.querySelector(".main__content-inner");
-  form.classList.add('u-display-none');
-
-  //add dino tiles to DOM
-  addDinoTiles(dinoList);
-
-  //add human tile to DOM
-  addHumanTile(human);
-
-  //add reset button to DOM
-  addResetButton(form, content);
-};
-
-document.addEventListener('submit', handleForm);
-
 /**
  * @description Creates object that describes human based on form data
  * @constructor
@@ -47,7 +16,10 @@ function Human(form) {
     feet: parseInt(form.user_height_feet.value),
     inches: parseInt(form.user_height_inches.value)
   }
-  this.imageSrc = './images/human.png'
+  this.image = {
+    src: './images/human.png',
+    alt: 'An illustration of a human'
+  }
 
   this.heightInFeet = function() {
     return this.height.inches/12 + this.height.feet;
@@ -107,7 +79,7 @@ const Dinosaur = (dino, human) => {
         }
       }
     }
-  })
+  });
 }
 
 /**
@@ -128,7 +100,7 @@ const addDinoTiles = (dinoList) => {
       `
         <div class='main__tile' data-id='index-${index}'>
           <div class='main__tile-inner'>
-            <img src='${dino.imageSrc}' />
+            <img src='${dino.image.src}' alt='${dino.image.alt}'/>
             <h4>${dino.species}</h4>
             <p>Location: ${dino.where}</p>
             <p>Time period: ${dino.when}</p>
@@ -152,7 +124,7 @@ const addHumanTile = (human) => {
     `
       <div class='main__tile' data-id='human'>
         <div class='main__tile-inner'>
-          <img src='${human.imageSrc}' />
+          <img src='${human.image.src}' alt='${human.image.alt}/>
           <h4>${human.name}</h4>
           <p>Location: ${human.location}</p>
           <p>Time period: Now</p>
@@ -168,7 +140,7 @@ const addHumanTile = (human) => {
 /**
  * @description Adds reset button with click handler to DOM
  * @param {element} form - Form with user input as HTML element
- * @param {element} content - Div with 'main__content-inner' class
+ * @param {element} content - Div that has 'main__content-inner' class
  */
 const addResetButton = (form, content) => {
   const newDiv = document.createElement("div");
@@ -193,3 +165,33 @@ const addResetButton = (form, content) => {
     form.classList.remove('u-display-none');
   });
 }
+
+/**
+ * @description Capture data from submitted form, hide form and call functions for click functionality
+ * @param {object} e - The event object
+ */
+const handleForm = (e) => {
+  e.preventDefault();
+  const form = e.target;
+
+  //create human object
+  const human = new Human(form);
+
+  //create dino objects
+  const dinoList = createDinoObjects(Dinos, human);
+
+  //hide form
+  const content = document.querySelector(".main__content-inner");
+  form.classList.add('u-display-none');
+
+  //add dino tiles to DOM
+  addDinoTiles(dinoList);
+
+  //add human tile to DOM
+  addHumanTile(human);
+
+  //add reset button to DOM
+  addResetButton(form, content);
+};
+
+document.addEventListener('submit', handleForm);
