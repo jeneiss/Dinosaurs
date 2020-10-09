@@ -14,30 +14,16 @@ function Human(form) {
   this.diet = form.user_diet.value;
   this.height = {
     feet: parseInt(form.user_height_feet.value),
-    inches: parseInt(form.user_height_inches.value)
-  }
+    inches: parseInt(form.user_height_inches.value),
+  };
   this.image = {
     src: './images/human.png',
-    alt: 'An illustration of a human'
-  }
+    alt: 'An illustration of a human',
+  };
 
-  this.heightInFeet = function() {
-    return this.height.inches/12 + this.height.feet;
-  }
-}
-
-/**
- * @description Loops through dinos to create dinosaur objects with additional methods
- * @param {array} Dinos - Array of objects describing dinosaurs
- * @param {object} human - Object describing a human
- * @returns {array} - Array of objects describing dinosaurs
- */
-const createDinoObjects = (Dinos, human) => {
-  const dinosaursArr = Dinos.map((dino) => {
-    return Dinosaur(dino, human);
-  });
-
-  return dinosaursArr;
+  this.heightInFeet = function () {
+    return this.height.inches / 12 + this.height.feet;
+  };
 }
 
 /**
@@ -48,53 +34,65 @@ const createDinoObjects = (Dinos, human) => {
  */
 const Dinosaur = (dino, human) => {
   return Object.assign(dino, {
-    compareHeight: function() {
+    compareHeight: function () {
       if (this.height > human.heightInFeet()) {
-        const heightDiff = Math.round(this.height/human.heightInFeet());
+        const heightDiff = Math.round(this.height / human.heightInFeet());
         return `The ${this.species} is about ${heightDiff} times taller than you.`;
       } else if (this.height === human.heightInFeet()) {
         return `You are about the same height as the ${this.species}.`;
       } else {
-        const heightDiff = Math.round(human.heightInFeet()/this.height);
+        const heightDiff = Math.round(human.heightInFeet() / this.height);
         return `You are about ${heightDiff} times taller than the ${this.species}.`;
       }
     },
-    compareWeight: function() {
+    compareWeight: function () {
       if (this.weight > human.weight) {
-        return `The ${this.species} weighs about ${this.weight-human.weight} pounds more than you.`;
+        return `The ${this.species} weighs about ${this.weight - human.weight} pounds more than you.`;
       } else if (this.weight === human.weight) {
         return `You weight about the same as ${this.species}.`;
       } else {
-        return `You weigh about ${human.weight-this.weight} pounds more than the  ${this.species}.`;
+        return `You weigh about ${human.weight - this.weight} pounds more than the  ${this.species}.`;
       }
     },
-    compareDiet: function() {
+    compareDiet: function () {
       if (this.diet === human.diet) {
-        return `You are both ${this.diet}s!`
+        return `You are both ${this.diet}s!`;
       } else {
         if (this.diet === 'omnivore') {
-          return `Unlike you, the ${this.species} is an ${this.diet}.`
+          return `Unlike you, the ${this.species} is an ${this.diet}.`;
         } else {
-          return `Unlike you, the ${this.species} is a ${this.diet}.`
+          return `Unlike you, the ${this.species} is a ${this.diet}.`;
         }
       }
     }
   });
-}
+};
+
+/**
+ * @description Loops through dinos to create dinosaur objects with additional methods
+ * @param {array} Dinos - Array of objects describing dinosaurs
+ * @param {object} human - Object describing a human
+ * @returns {array} - Array of objects describing dinosaurs
+ */
+const createDinoObjects = (Dinos, human) => {
+  const dinosaursArr = Dinos.map((dino) => Dinosaur(dino, human));
+
+  return dinosaursArr;
+};
 
 /**
  * @description Loops through object array to append info to DOM
  * @param {array} dinoList - array of objects describing dinosaurs
  */
 const addDinoTiles = (dinoList) => {
-  //create new div for tiles
+  // Create new div for tiles
   const newDiv = document.createElement('div');
   document
     .querySelector('.main__content-inner')
     .appendChild(newDiv)
     .classList.add('main__tiles');
 
-  //append tiles to .main__tiles
+  // Append tiles to .main__tiles
   dinoList.forEach((dino, index) => {
     document.querySelector('.main__tiles').insertAdjacentHTML('beforeend',
       `
@@ -113,7 +111,7 @@ const addDinoTiles = (dinoList) => {
       `
     );
   });
-}
+};
 
 /**
  * @description Insert human info into DOM
@@ -135,7 +133,7 @@ const addHumanTile = (human) => {
       </div>
     `
   );
-}
+};
 
 /**
  * @description Adds reset button with click handler to DOM
@@ -143,7 +141,7 @@ const addHumanTile = (human) => {
  * @param {element} content - Div that has 'main__content-inner' class
  */
 const addResetButton = (form, content) => {
-  const newDiv = document.createElement("div");
+  const newDiv = document.createElement('div');
   content
     .appendChild(newDiv)
     .classList.add('main__reset');
@@ -164,7 +162,7 @@ const addResetButton = (form, content) => {
     form.reset();
     form.classList.remove('u-display-none');
   });
-}
+};
 
 /**
  * @description Capture data from submitted form, hide form and call functions for click functionality
@@ -174,23 +172,23 @@ const handleForm = (e) => {
   e.preventDefault();
   const form = e.target;
 
-  //create human object
+  // Create human object
   const human = new Human(form);
 
-  //create dino objects
+  // Create dino objects
   const dinoList = createDinoObjects(Dinos, human);
 
-  //hide form
-  const content = document.querySelector(".main__content-inner");
+  // Hide form
+  const content = document.querySelector('.main__content-inner');
   form.classList.add('u-display-none');
 
-  //add dino tiles to DOM
+  // Add dino tiles to DOM
   addDinoTiles(dinoList);
 
-  //add human tile to DOM
+  // Add human tile to DOM
   addHumanTile(human);
 
-  //add reset button to DOM
+  // Add reset button to DOM
   addResetButton(form, content);
 };
 
