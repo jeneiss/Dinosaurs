@@ -1,61 +1,80 @@
 <!DOCTYPE html>
-<html lang ="en">
+<html lang ='en'>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Dinosaurs!</title>
   </head>
   <body>
-    <div id="app">
-      <header class="header__content">
-        <div class="header__content-inner">
-          <h2 class="header__subtitle">Natural History Museum</h2>
-          <h1 class="header__title">Dinosaurs!</h1>
+    <div id='app'>
+      <header class='header'>
+        <div class='header__inner'>
+          <h2 class='header__subtitle'>Natural History Museum</h2>
+          <h1 class='header__title'>Dinosaurs!</h1>
         </div>
       </header>
 
-      <main class="main__content">
-        <div class="main__content-inner">
-          <h3 class="main__title">How do you compare?</h3>
+      <main class='main'>
+        <div class='main__inner'>
+          <h3 class='main__title'>How do you compare?</h3>
 
-          <form class="main__form" id="humanForm">
+          <form class='main__form' id='humanForm'>
+            <div class='main__form-inner'>
 
-            <label for="user_name">Name</label>
-            <input type="text" id="user_name" name="user_name" required>
+              <div class='main__form-field'>
+                <label for='user_name'>Name</label>
+                <input type='text' id='user_name' name='user_name' required>
+              </div>
 
-            <label for="user_location">Location</label>
-            <input type="text" id="user_location" name="user_location" required>
+              <div class='main__form-field'>
+                <label for='user_location'>Location</label>
+                <input type='text' id='user_location' name='user_location' required>
+              </div>
 
-            <fieldset>
+              <div class='main__form-fieldset'>
+                <fieldset>
 
-              <legend>Height</legend>
-              <label for="user_height_feet">Feet</label>
-              <input type="number" id="user_height_feet" name="user_height_feet" required>
+                  <legend>Height</legend>
+                  <div class='main__form-field'>
+                    <label for='user_height_feet'>Feet</label>
+                    <input type='number' id='user_height_feet' name='user_height_feet' required>
+                  </div>
 
-              <label for="user_height_inches">Inches</label>
-              <input type="number" id="user_height_inches" name="user_height_inches" required>
+                  <div class='main__form-field'>
+                    <label for='user_height_inches'>Inches</label>
+                    <input type='number' id='user_height_inches' name='user_height_inches' required>
+                  </div>
 
-            </fieldset>
+                </fieldset>
+              </div>
 
-            <label for="user_weight">Weight (lbs)</label>
-            <input type="number" id="user_weight" name="user_weight" required>
+              <div class='main__form-field'>
+                <label for='user_weight'>Weight (lbs)</label>
+                <input type='number' id='user_weight' name='user_weight' required>
+              </div>
 
-            <label for="user_diet">Diet:</label>
-              <select name="user_diet" id="user_diet">
-                <option value="herbivore">Herbivore</option>
-                <option value="carnivore">Carnivore</option>
-                <option value="omnivore">Omnivore</option>
-              </select>
+              <div class='main__form-field'>
+                <label for='user_diet'>Diet:</label>
+                  <select name='user_diet' id='user_diet'>
+                    <option value='herbivore'>Herbivore</option>
+                    <option value='carnivore'>Carnivore</option>
+                    <option value='omnivore'>Omnivore</option>
+                  </select>
+              </div>
 
-              <input type="submit" value="Compare me">
+              <div class='main__submit-btn'>
+                <input type='submit' value='Compare me'>
+              </div>
 
+            </div>
           </form>
+
         </div>
       </main>
 
-      <footer class="footer">
-        <div class="footer__inner">
-          <div class="footer__text">Data Sourced from <a href="https://Wikipedia.org">Wikipedia.org</a>. All numbers are approximations.</div>
+      <footer class='footer'>
+        <div class='footer__inner'>
+          <div class='footer__text'>Data Sourced from <a href='https://Wikipedia.org'>Wikipedia.org</a>. All numbers are approximations.</div>
         </div>
       </footer>
     </div>

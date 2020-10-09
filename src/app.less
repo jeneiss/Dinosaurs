@@ -1,3 +1,185 @@
+/* Fonts */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cinzel/v10/8vIJ7ww63mVu7gt79mT7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cinzel/v10/8vIJ7ww63mVu7gt79mT7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v18/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v18/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Variables */
+@title-font: 'Cinzel', Arial, Helvetica, sans-serif;
+@body-font: 'Raleway', Arial, Helvetica, sans-serif;
+
+/* Styles */
+body {
+  font-family: @body-font;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+h1, h2, h3, h4 {
+  font-family: @title-font;
+}
+
+/* Header styling */
+.header {
+  margin: 5rem auto;
+  width: 100%;
+
+  &__inner {
+    padding: 0 0.5rem;
+    text-align: center;
+  }
+
+  &__title,
+  &__subtitle {
+    margin: 0;
+  }
+
+  &__title {
+    font-size: 3rem;
+    font-weight: 800;
+  }
+
+  &__subtitle {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+}
+
+/* Main styling */
+.main {
+  /* Form styling */
+  &__title,
+  &__form {
+    width: 90%;
+
+    @media (min-width: 32.5rem) {
+      width: 32.5rem;
+    }
+  }
+
+  &__title {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  &__form {
+    margin: auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px fade(#000, 20%);
+
+  }
+
+  &__form-inner {
+    padding: 1rem;
+  }
+
+  &__form-field {
+    padding: 0.5rem;
+  }
+
+  label {
+    display: block;
+  }
+
+  input,
+  label {
+    width: 100%;
+  }
+
+  input {
+    max-width: 15rem;
+  }
+
+  fieldset {
+    padding-left: 0.35em;
+    padding-right: 0.35em;
+    border: none;
+
+    input {
+      width: 5rem;
+    }
+  }
+
+  &__submit-btn {
+    margin-top: 2rem;
+
+    input {
+      max-width: 100%;
+    }
+  }
+
+  /* Dino tiles styling */
+  &__tiles {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  &__tile {
+    width: 100%;
+
+    @media (min-width: 37.5rem) {
+      width: 48%;
+    }
+
+    @media (min-width: 48rem) {
+      width: 30%;
+    }
+  }
+
+  &__tile-inner {
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+/* Footer styling */
+.footer {
+  margin-top: 5rem;
+
+  &__inner {
+    padding: 1rem;
+  }
+}
+
+
+/* Utility classes */
 .u-display-none {
   display: none;
 }

@@ -88,7 +88,7 @@ const addDinoTiles = (dinoList) => {
   // Create new div for tiles
   const newDiv = document.createElement('div');
   document
-    .querySelector('.main__content-inner')
+    .querySelector('.main__inner')
     .appendChild(newDiv)
     .classList.add('main__tiles');
 
@@ -122,7 +122,7 @@ const addHumanTile = (human) => {
     `
       <div class='main__tile' data-id='human'>
         <div class='main__tile-inner'>
-          <img src='${human.image.src}' alt='${human.image.alt}/>
+          <img src='${human.image.src}' alt='${human.image.alt}' />
           <h4>${human.name}</h4>
           <p>Location: ${human.location}</p>
           <p>Time period: Now</p>
@@ -138,7 +138,7 @@ const addHumanTile = (human) => {
 /**
  * @description Adds reset button with click handler to DOM
  * @param {element} form - Form with user input as HTML element
- * @param {element} content - Div that has 'main__content-inner' class
+ * @param {element} content - Div that has 'main__inner' class
  */
 const addResetButton = (form, content) => {
   const newDiv = document.createElement('div');
@@ -179,7 +179,6 @@ const handleForm = (e) => {
   const dinoList = createDinoObjects(Dinos, human);
 
   // Hide form
-  const content = document.querySelector('.main__content-inner');
   form.classList.add('u-display-none');
 
   // Add dino tiles to DOM
@@ -189,6 +188,7 @@ const handleForm = (e) => {
   addHumanTile(human);
 
   // Add reset button to DOM
+  const content = document.querySelector('.main__inner');
   addResetButton(form, content);
 };
 
