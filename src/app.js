@@ -94,22 +94,41 @@ const addDinoTiles = (dinoList) => {
 
   // Append tiles to .main__tiles
   dinoList.forEach((dino, index) => {
-    document.querySelector('.main__tiles').insertAdjacentHTML('beforeend',
-      `
-        <div class='main__tile' data-id='index-${index}'>
-          <div class='main__tile-inner'>
-            <img src='${dino.image.src}' alt='${dino.image.alt}'/>
-            <h4>${dino.species}</h4>
-            <p><strong>Location:</strong> ${dino.where}</p>
-            <p><strong>Time period:</strong> ${dino.when}</p>
-            <p>${dino.fact}</p>
-            <p>${dino.compareHeight()}</p>
-            <p>${dino.compareWeight()}</p>
-            <p>${dino.compareDiet()}</p>
+    const tileContainer = document.querySelector('.main__tiles');
+
+    //Pigeon only displays one fact
+    if (dino.species === 'Pigeon') {
+      tileContainer.insertAdjacentHTML('beforeend',
+        `
+          <div class='main__tile' data-id='index-${index}'>
+            <div class='main__tile-inner'>
+              <img src='${dino.image.src}' alt='${dino.image.alt}'/>
+              <h4>${dino.species}</h4>
+              <p>${dino.facts[0]}</p>
+            </div>
           </div>
-        </div>
-      `
-    );
+        `
+      );
+    } else {
+      //Create dino facts
+      dino.facts.push(dino.compareDiet());
+      dino.facts.push(dino.compareHeight());
+      dino.facts.push(dino.compareWeight());
+
+      //Create dino tile with randomized fact
+      const factIndex = Math.floor(Math.random() * Math.floor(dino.facts.length));
+      tileContainer.insertAdjacentHTML('beforeend',
+        `
+          <div class='main__tile' data-id='index-${index}'>
+            <div class='main__tile-inner'>
+              <img src='${dino.image.src}' alt='${dino.image.alt}'/>
+              <h4>${dino.species}</h4>
+              <p>${dino.facts[factIndex]}</p>
+            </div>
+          </div>
+        `
+      );
+    }
   });
 };
 
@@ -124,11 +143,7 @@ const addHumanTile = (human) => {
         <div class='main__tile-inner'>
           <img src='${human.image.src}' alt='${human.image.alt}' />
           <h4>${human.name}</h4>
-          <p><strong>Location:</strong> ${human.location}</p>
-          <p><strong>Time period:</strong> Now</p>
-          <p><strong>Height:</strong> ${human.height.feet}ft ${human.height.inches}in</p>
-          <p><strong>Weight:</strong> ${human.weight}</p>
-          <p><strong>Diet:</strong> ${human.diet}</p>
+
         </div>
       </div>
     `
