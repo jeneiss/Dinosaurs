@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const path = require('path');
 const { prependListener } = require('process');
 
@@ -24,6 +25,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new FaviconsWebpackPlugin('./src/images/tracks.png'),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
