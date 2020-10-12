@@ -51,7 +51,7 @@ const Dinosaur = (dino, human) => {
       } else if (this.weight === human.weight) {
         return `You weight about the same as ${this.species}.`;
       } else {
-        return `You weigh about ${human.weight - this.weight} pounds more than the  ${this.species}.`;
+        return `You weigh about ${human.weight - this.weight} pounds more than the ${this.species}.`;
       }
     },
     compareDiet: function () {
