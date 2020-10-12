@@ -38,8 +38,11 @@
 /* Variables */
 @title-font: 'Cinzel', Arial, Helvetica, sans-serif;
 @body-font: 'Raleway', Arial, Helvetica, sans-serif;
+@pink: rgba(238,174,202,1);
+@lightBlue:  rgba(148,187,233,1);
+@darkBlue: #003366;
 
-/* Styles */
+/* Global styles */
 body {
   font-family: @body-font;
   font-weight: 400;
@@ -50,9 +53,23 @@ h1, h2, h3, h4 {
   font-family: @title-font;
 }
 
+#app {
+  min-height: 100vh;
+  background: radial-gradient(circle, @pink 0%, @lightBlue 100%);
+}
+
+a {
+  color: @darkBlue;
+
+  &:hover {
+    color: lighten(@darkBlue, 20%);
+  }
+}
+
 /* Header styling */
 .header {
-  margin: 5rem auto;
+  margin: 0 auto;
+  padding: 5rem 0;
   width: 100%;
 
   &__inner {
@@ -124,6 +141,7 @@ h1, h2, h3, h4 {
   }
 
   fieldset {
+    margin-top: 0.5rem;
     padding-left: 0.35em;
     padding-right: 0.35em;
     border: none;
@@ -136,8 +154,8 @@ h1, h2, h3, h4 {
   &__submit-btn {
     margin-top: 2rem;
 
-    input {
-      max-width: 100%;
+    button {
+      width: 100%;
     }
   }
 
@@ -148,23 +166,58 @@ h1, h2, h3, h4 {
     flex-wrap: wrap;
     margin: 0 auto;
     width: 90%;
+
+    @media (min-width: 70rem) {
+      width: 70%;
+    }
   }
 
   &__tile {
+    position: relative;
+    margin-bottom: 1rem;
     width: 100%;
+    border: 1px solid #000;
+    animation: 1s ease-in fadeIn;
 
     @media (min-width: 37.5rem) {
-      width: 48%;
+      width: 47%;
     }
 
     @media (min-width: 48rem) {
-      width: 30%;
+      width: 31%;
     }
   }
 
   &__tile-inner {
+    padding: 0.5rem;
+
     img {
       max-width: 100%;
+    }
+  }
+
+  &__reset {
+    text-align: center;
+  }
+
+  &__reset-btn {
+    margin-top: 2rem;
+    width: 19rem;
+  }
+
+  /* Button styling */
+  &__submit-btn button,
+  &__reset-btn {
+    padding: 0.5rem;
+    color: @darkBlue;
+    border: 2px solid @darkBlue;
+    background-color: transparent;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      color: #fff;
+      background-color: @darkBlue;
     }
   }
 }
@@ -182,4 +235,9 @@ h1, h2, h3, h4 {
 /* Utility classes */
 .u-display-none {
   display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 100%; }
 }

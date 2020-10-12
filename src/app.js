@@ -100,8 +100,8 @@ const addDinoTiles = (dinoList) => {
           <div class='main__tile-inner'>
             <img src='${dino.image.src}' alt='${dino.image.alt}'/>
             <h4>${dino.species}</h4>
-            <p>Location: ${dino.where}</p>
-            <p>Time period: ${dino.when}</p>
+            <p><strong>Location:</strong> ${dino.where}</p>
+            <p><strong>Time period:</strong> ${dino.when}</p>
             <p>${dino.fact}</p>
             <p>${dino.compareHeight()}</p>
             <p>${dino.compareWeight()}</p>
@@ -124,11 +124,11 @@ const addHumanTile = (human) => {
         <div class='main__tile-inner'>
           <img src='${human.image.src}' alt='${human.image.alt}' />
           <h4>${human.name}</h4>
-          <p>Location: ${human.location}</p>
-          <p>Time period: Now</p>
-          <p>Height: ${human.height.feet}ft ${human.height.inches}in</p>
-          <p>Weight: ${human.weight}</p>
-          <p>Diet: ${human.diet}</p>
+          <p><strong>Location:</strong> ${human.location}</p>
+          <p><strong>Time period:</strong> Now</p>
+          <p><strong>Height:</strong> ${human.height.feet}ft ${human.height.inches}in</p>
+          <p><strong>Weight:</strong> ${human.weight}</p>
+          <p><strong>Diet:</strong> ${human.diet}</p>
         </div>
       </div>
     `
@@ -149,7 +149,9 @@ const addResetButton = (form, content) => {
   const reset = document.querySelector('.main__reset');
   reset.insertAdjacentHTML('beforeend',
     `
-      <button class='main__reset-btn'>Reset</button>
+      <button class='main__reset-btn'>
+        <strong>Reset</strong>
+      </button>
     `
   );
 
