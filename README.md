@@ -1,5 +1,5 @@
 # Dinosaurs
-An app that compares user provided characteristics to those of eight dinosaurs.
+An app that compares user provided characteristics to those of eight dinosaurs using an object-oriented programming approach.
 
 Built with Webpack for bundling and Babel for ES6 -> ES5 transpilation; uses LESS for styling.
 
